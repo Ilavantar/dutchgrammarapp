@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dutch Grammar</title>
+  <style>
+    form.inline {display: inline;}
+  </style>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+  <h1 th:text="${exerciseTitle}"></h1>
+
+  <div class="side-menu">
+    <a th:href="@{/present_tense}">Present tense</a> <br>
+    <a th:href="@{/het_de}">Het and de</a>
+  </div>
+
+  <div class="questions">
+    <form action="#" th:action="@{/check}" method="post" class="inline">
+
+      <span th:text="${ex1part1}"></span>
+      <input type="text" id="ans1" name="ans1" th:value="${ans1}" autocomplete="off"/>
+      <span th:text="${ex1part2}"></span>
+      <p th:text="' ' + ${check1}"></p><br>
+
+      <span th:text="${ex2part1}"></span>
+      <input type="text" id="ans2" name="ans2" th:value="${ans2}" autocomplete="off"/>
+      <span th:text="${ex2part2}"></span>
+      <p th:text="' ' + ${check2}"></p><br>
+
+      <span th:text="${ex3part1}"></span>
+      <input type="text" id="ans3" name="ans3" th:value="${ans3}" autocomplete="off"/>
+      <span th:text="${ex3part2}"></span>
+      <p th:text="' ' + ${check3}"></p><br>
+
+      <span th:text="${ex4part1}"></span>
+      <input type="text" id="ans4" name="ans4" th:value="${ans4}" autocomplete="off"/>
+      <span th:text="${ex4part2}"></span>
+      <p th:text="' ' + ${check4}"></p><br>
+
+      <span th:text="${ex5part1}"></span>
+      <input type="text" id="ans5" name="ans5" th:value="${ans5}" autocomplete="off"/>
+      <span th:text="${ex5part2}"></span>
+      <p th:text="' ' + ${check5}"></p><br>
+
+      <span th:text="${ex6part1}"></span>
+      <input type="text" id="ans6" name="ans6" th:value="${ans6}" autocomplete="off"/>
+      <span th:text="${ex6part2}"></span>
+      <p th:text="' ' + ${check6}"></p><br>
+
+      <span th:text="${ex7part1}"></span>
+      <input type="text" id="ans7" name="ans7" th:value="${ans7}" autocomplete="off"/>
+      <span th:text="${ex7part2}"></span>
+      <p th:text="' ' + ${check7}"></p><br>
+
+      <span th:text="${ex8part1}"></span>
+      <input type="text" id="ans8" name="ans8" th:value="${ans8}" autocomplete="off"/>
+      <span th:text="${ex8part2}"></span>
+      <p th:text="' ' + ${check8}"></p><br>
+
+      <span th:text="${ex9part1}"></span>
+      <input type="text" id="ans9" name="ans9" th:value="${ans9}" autocomplete="off"/>
+      <span th:text="${ex9part2}"></span>
+      <p th:text="' ' + ${check9}"></p><br>
+
+      <span th:text="${ex10part1}"></span>
+      <input type="text" id="ans10" name="ans10" th:value="${ans10}" autocomplete="off"/>
+      <span th:text="${ex10part2}"></span>
+      <p th:text="' ' + ${check10}"></p><br>
+
+
+      <input type="submit" value="Submit" class="submit_button">
+    </form>
+
+    <form action="#" th:action="@{/previous}" method="post" class="inline">
+      <input type="submit" value="Previous">
+    </form>
+
+    <form action="#" th:action="@{/next}" method="post" class="inline">
+      <input type="submit" value="Next">
+    </form>
+  </div>
+
+
+
+
+</body>
+</html>
