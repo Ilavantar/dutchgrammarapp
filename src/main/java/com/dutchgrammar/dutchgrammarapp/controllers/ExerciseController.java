@@ -16,6 +16,8 @@ import java.util.Locale;
 @Controller
 public class ExerciseController {
 
+    private boolean first;
+    private boolean last;
 
     private int pagePresentTense = 0;
     private int pageHetDe = 0;
@@ -147,16 +149,21 @@ public class ExerciseController {
                 this.pagePresentTense--;
             }
             return "redirect:/present_tense";
+
         } else if(exercise.equals("het de words")){
             if(this.pageHetDe > 0){
+                first = false;
                 this.pageHetDe--;
-            }
+            } else first = true;
             return "redirect:/het_de";
+
         } else if(exercise.equals("imperfectum")){
             if(pageImperfectum > 0){
+                first = false;
                 pageImperfectum--;
-            }
+            } else first = true;
             return "redirect:/imperfectum";
+
         }
 
         return "redirect:/";
@@ -177,6 +184,16 @@ public class ExerciseController {
             model.addAttribute("check" + i, " ");
         }
         setParamsPresentTense(model, pagePresentTense);
+        if(pagePresentTense > 0){
+            first = false;
+        } else first = true;
+
+        if(pagePresentTense < presentTenseDAO.exercisesNumber()/10 - 1){
+            last = false;
+        } else last = true;
+
+        model.addAttribute("last", last);
+        model.addAttribute("first", first);
 
         return "index";
     }
@@ -191,6 +208,8 @@ public class ExerciseController {
             model.addAttribute("check" + i, " ");
         }
         setParamsHetDeWords(model, pageHetDe);
+        if(pageHetDe == 0) first = true;
+        model.addAttribute("first", first);
 
         return "index";
 
@@ -207,6 +226,8 @@ public class ExerciseController {
         }
 
         setParamsImperfectum(model, pageImperfectum);
+        if(pageImperfectum == 0) first = true;
+        model.addAttribute("first", first);
 
         return "index";
     }

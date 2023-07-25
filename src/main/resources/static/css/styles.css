@@ -48,6 +48,11 @@ body {
             border-radius: 5px;
             cursor: pointer;
             margin-right: 20px;
+            transition: background-color 0.15s;
+}
+
+.submit_button:hover {
+    background-color: rgb(27, 27, 27);
 }
 
 .questions {
@@ -73,11 +78,27 @@ body {
 
 .prev-button, .next-button {
     background-color: gray;
-                color: white;
-                border: none;
-                height: 30px;
-                width: 80px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-right: 10px;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.15s;
+}
+
+.prev-button:hover, .next-button:hover {
+    background-color: rgb(150, 150, 150)
+}
+
+.faded-button {
+    background-color: rgb(175, 175, 175);
+                    color: white;
+                    border: none;
+                    height: 30px;
+                    width: 80px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    margin-right: 10px;
 }
