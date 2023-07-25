@@ -9,15 +9,38 @@
   <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-  <h1 th:text="${exerciseTitle}"></h1>
 
-  <div class="side-menu">
-    <a th:href="@{/present_tense}">Present tense</a> <br>
-    <a th:href="@{/het_de}">Het and de</a>
+
+
+  <div class="sidemenu">
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/present_tense}">Present tense</a></li>
+      <li><a th:href="@{/het_de}">Het and de</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
   </div>
 
   <div class="questions">
-    <form action="#" th:action="@{/check}" method="post" class="inline">
+
+    <h1 th:text="${exerciseTitle}"></h1>
+
+<!--    <div class="next-prev-buttons">-->
+
+<!--      <form action="#" th:action="@{/previous}" method="post" >-->
+<!--        <input type="submit" value="Previous" class="prev-button">-->
+<!--      </form>-->
+
+<!--      <form action="#" th:action="@{/next}" method="post" >-->
+<!--        <input type="submit" value="Next" class="next-button">-->
+<!--      </form>-->
+
+<!--    </div>-->
+
+
+
+    <form id="checkForm" action="#" th:action="@{/check}" method="post" class="inline">
 
       <span th:text="${ex1part1}"></span>
       <input type="text" id="ans1" name="ans1" th:value="${ans1}" autocomplete="off"/>
@@ -70,17 +93,27 @@
       <p th:text="' ' + ${check10}"></p><br>
 
 
-      <input type="submit" value="Submit" class="submit_button">
+<!--      <input type="submit" value="Submit" class="submit_button">-->
     </form>
 
-    <form action="#" th:action="@{/previous}" method="post" class="inline">
-      <input type="submit" value="Previous">
-    </form>
+    <div class="button-container">
 
-    <form action="#" th:action="@{/next}" method="post" class="inline">
-      <input type="submit" value="Next">
-    </form>
+      <input type="submit" value="Submit" class="submit_button" form="checkForm">
+
+      <form action="#" th:action="@{/previous}" method="post" >
+        <input type="submit" value="Previous" class="prev-button">
+      </form>
+
+      <form action="#" th:action="@{/next}" method="post" >
+        <input type="submit" value="Next" class="next-button">
+      </form>
+
+    </div>
+
+
   </div>
+
+
 
 
 

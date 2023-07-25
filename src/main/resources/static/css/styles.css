@@ -6,6 +6,37 @@ h1 {
 
 body {
     font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+.sidemenu {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    background-color: #333;
+}
+
+.sidemenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidemenu ul li {
+    padding: 15px 0;
+    border-bottom: 1px solid #555;
+}
+
+.sidemenu ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+}
+
+.sidemenu ul li a:hover {
+    background-color: #555;
 }
 
 .submit_button {
@@ -16,9 +47,37 @@ body {
             width: 80px;
             border-radius: 5px;
             cursor: pointer;
+            margin-right: 20px;
 }
 
 .questions {
+    margin-left: 200px; /* This should be equal to the width of your side menu. */
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center; /* This will center your items horizontally. */
+}
+
+.next-prev-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+
+.prev-button, .next-button {
+    background-color: gray;
+                color: white;
+                border: none;
+                height: 30px;
+                width: 80px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
 }
