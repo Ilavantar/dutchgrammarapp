@@ -102,11 +102,11 @@
       <input type="submit" value="Submit" class="submit_button" form="checkForm">
 
       <form action="#" th:action="@{/previous}" method="post" >
-        <input type="submit" value="Previous" th:class="${first} ? 'faded-button' : 'prev-button'">
+        <input type="submit" value="Previous" th:class="${first} ? 'faded-button' : 'prev-button'" th:disabled="${first}">
       </form>
 
       <form action="#" th:action="@{/next}" method="post" >
-        <input type="submit" value="Next" th:class="${last} ? 'faded-button' : 'next-button'">
+        <input type="submit" value="Next" th:class="${last} ? 'faded-button' : 'next-button'" th:disabled="${last}">
       </form>
 
     </div>

@@ -208,7 +208,16 @@ public class ExerciseController {
             model.addAttribute("check" + i, " ");
         }
         setParamsHetDeWords(model, pageHetDe);
-        if(pageHetDe == 0) first = true;
+
+        if(pageHetDe > 0){
+            first = false;
+        } else first = true;
+
+        if(pageHetDe < hetDeWordsDAO.exercisesNumber()/10 - 1){
+            last = false;
+        } else last = true;
+
+        model.addAttribute("last", last);
         model.addAttribute("first", first);
 
         return "index";
@@ -226,7 +235,16 @@ public class ExerciseController {
         }
 
         setParamsImperfectum(model, pageImperfectum);
-        if(pageImperfectum == 0) first = true;
+
+        if(pageImperfectum > 0){
+            first = false;
+        } else first = true;
+
+        if(pageImperfectum < imperfectumDAO.ExercisesNumber()/10 - 1){
+            last = false;
+        } else last = true;
+
+        model.addAttribute("last", last);
         model.addAttribute("first", first);
 
         return "index";
