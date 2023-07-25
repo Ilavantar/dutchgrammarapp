@@ -1,8 +1,10 @@
 package com.dutchgrammar.dutchgrammarapp.controllers;
 
 import com.dutchgrammar.dutchgrammarapp.dao.HetDeWordsDAO;
+import com.dutchgrammar.dutchgrammarapp.dao.ImperfectumDAO;
 import com.dutchgrammar.dutchgrammarapp.dao.PresentTenseDAO;
 import com.dutchgrammar.dutchgrammarapp.entity.HetDeWords;
+import com.dutchgrammar.dutchgrammarapp.entity.Imperfectum;
 import com.dutchgrammar.dutchgrammarapp.entity.PresentTense;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,13 @@ public class ExerciseController {
     private int pagePresentTense = 0;
     private int pageHetDe = 0;
 
+    private int pageImperfectum = 0;
+
     private String exercise = "None";
 
     private PresentTenseDAO presentTenseDAO;
     private HetDeWordsDAO hetDeWordsDAO;
+    private ImperfectumDAO imperfectumDAO;
 
     @Autowired
     public void setPresentTenseDAO(PresentTenseDAO presentTenseDAO){
@@ -31,6 +36,11 @@ public class ExerciseController {
     @Autowired
     public void setHetDeWordsDAO(HetDeWordsDAO hetDeWordsDAO) {
         this.hetDeWordsDAO = hetDeWordsDAO;
+    }
+
+    @Autowired
+    public void setImperfectumDAO(ImperfectumDAO imperfectumDAO) {
+        this.imperfectumDAO = imperfectumDAO;
     }
 
     public void setParamsPresentTense(Model model, int page){
@@ -67,6 +77,25 @@ public class ExerciseController {
         }
     }
 
+    public void setParamsImperfectum(Model model, int page){
+
+        int start = page * 10;
+
+        model.addAttribute("exerciseTitle", "Imperfectum");
+
+        for(int i = start; i < start + 10; i++){
+            int id = i + 1 - start;
+            int databaseId = i + 1;
+            Imperfectum example = imperfectumDAO.findById(databaseId);
+            String question = example.getQuestion();
+
+            String[] parts = question.split("___");
+            model.addAttribute("ex" + id + "part1", parts[0]);
+            model.addAttribute("ex" + id + "part2", parts[1]);
+        }
+
+    }
+
     public void nextPage(int[] array, int page){
         int[] baseArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         for(int i = 0; i < 10; i++){
@@ -98,6 +127,13 @@ public class ExerciseController {
             }
             setParamsHetDeWords(model, pageHetDe);
             return "redirect:/het_de";
+        } else if(exercise.equals("imperfectum")){
+
+            if(pageImperfectum < imperfectumDAO.ExercisesNumber()/10 - 1){
+                pageImperfectum++;
+            }
+            setParamsImperfectum(model, pageImperfectum);
+            return "redirect:/imperfectum";
         }
 
         return "redirect:/";
@@ -116,6 +152,11 @@ public class ExerciseController {
                 this.pageHetDe--;
             }
             return "redirect:/het_de";
+        } else if(exercise.equals("imperfectum")){
+            if(pageImperfectum > 0){
+                pageImperfectum--;
+            }
+            return "redirect:/imperfectum";
         }
 
         return "redirect:/";
@@ -129,6 +170,7 @@ public class ExerciseController {
     @GetMapping("/present_tense")
     public String presentTenseExercise(Model model){
         pageHetDe = 0;
+        pageImperfectum = 0;
         exercise = "present tense";
 
         for(int i = 1; i < 11; i++){
@@ -142,6 +184,7 @@ public class ExerciseController {
     @GetMapping("/het_de")
     public String hetDeExercise(Model model){
         pagePresentTense = 0;
+        pageImperfectum = 0;
         exercise = "het de words";
 
         for(int i = 1; i < 11; i++){
@@ -151,6 +194,21 @@ public class ExerciseController {
 
         return "index";
 
+    }
+
+    @GetMapping("/imperfectum")
+    public String imperfectum(Model model){
+        pagePresentTense = 0;
+        pageHetDe = 0;
+        exercise = "imperfectum";
+
+        for(int i = 1; i < 11; i++){
+            model.addAttribute("check" + i, " ");
+        }
+
+        setParamsImperfectum(model, pageImperfectum);
+
+        return "index";
     }
 
     @PostMapping("/check")
@@ -203,6 +261,21 @@ public class ExerciseController {
             }
             setParamsHetDeWords(model, pageHetDe);
 
+        } else if(exercise.equals("imperfectum")){
+            int start = 10 * pageImperfectum;
+            for(int i = start; i < start + 10; i++){
+                int id = i + 1 - start;
+                int databaseId = i + 1;
+                Imperfectum example = imperfectumDAO.findById(databaseId);
+                String correctAnswer = example.getAnswer().toLowerCase();
+                String userAnswer = answers[i - start].toLowerCase();
+                if(userAnswer.equals(correctAnswer)){
+                    model.addAttribute("check" + id, "correct");
+                } else {
+                  model.addAttribute("check" + id, "wrong, correct answer: " + correctAnswer);
+                }
+            }
+            setParamsImperfectum(model, pageImperfectum);
         }
 
         for(int i = 0; i < 10; i++){
